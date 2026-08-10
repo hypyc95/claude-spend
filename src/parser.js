@@ -4,7 +4,7 @@ const os = require('os');
 const readline = require('readline');
 const zlib = require('zlib');
 
-// Archive: individual brotli-compressed JSONL files, delta-copied from ~/.claude/projects/
+// Archive: individual brotli-compressed JSONL files, delta-copied from getClaudeDir()/projects/
 const ARCHIVE_SESSIONS_DIR = path.join(os.homedir(), '.claude-spend', 'sessions');
 const BROTLI_QUALITY = 6; // best balance of size (86%) vs speed
 
@@ -48,8 +48,13 @@ function syncSessionsToArchive(projectsDir) {
   return copied;
 }
 
+// Root of the Claude Code data dir whose `projects/` holds the session JSONL files.
+// Hardcoded to this machine's layout. If the user directory is ever migrated, or the
+// dashboard comes up empty, this is the line to change. Upstream default is
+// `path.join(os.homedir(), '.claude')`, which here resolves to C:\Users\Hynek\.claude
+// (that dir exists but has no `projects/` subdir, so it yields an empty dashboard).
 function getClaudeDir() {
-  return path.join(os.homedir(), '.claude');
+  return 'C:\\Users\\Hynek\\Claude\\code\\.claude';
 }
 
 function pathToProjectDir(absPath) {
