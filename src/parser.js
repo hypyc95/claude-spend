@@ -49,7 +49,7 @@ function syncSessionsToArchive(projectsDir) {
 }
 
 function getClaudeDir() {
-  return path.join(os.homedir(), '.claude');
+  return path.join(os.homedir(), 'code/.claude');
 }
 
 function pathToProjectDir(absPath) {
